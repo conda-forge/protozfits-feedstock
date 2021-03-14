@@ -25,6 +25,6 @@ python:
 target_platform:
 - osx-64
 zeromq:
-- 4.3.3
+- 4.3.4
 zlib:
 - '1.2'
