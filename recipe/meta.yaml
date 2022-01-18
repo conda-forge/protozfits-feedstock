@@ -8,9 +8,11 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: a3864c6097196208fca15b17eb49241675b3811bd6d1ffec206ce0e3bba8f89f
+  patches:
+    - 0001-Add-support-for-CMAKE_ARGS-in-setup.py-to-enable-con.patch
 
 build:
-  number: 6
+  number: 7
   script: "{{ PYTHON }} -m pip install . -vv"
   skip: True  # [win]
   skip: true  # [py<36]
@@ -22,6 +24,14 @@ requirements:
     - cmake
     - make   # [not win]
     - ninja  # [win]
+    # for enabling m1 cross compilation
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - protobuf                               # [build_platform != target_platform]
+    - libprotobuf                            # [build_platform != target_platform]
+    - setuptools                             # [build_platform != target_platform]
+    - zeromq                                 # [build_platform != target_platform]
+    - zlib                                   # [build_platform != target_platform]
   host:
     - pip
     - python
