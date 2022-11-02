@@ -12,7 +12,7 @@ source:
     - 0001-Add-support-for-CMAKE_ARGS-in-setup.py-to-enable-con.patch
 
 build:
-  number: 10
+  number: 11
   script: "{{ PYTHON }} -m pip install . -vv"
   skip: true  # [win]
   skip: true  # [py<36]
@@ -36,7 +36,7 @@ requirements:
   host:
     - pip
     - python
-    - protobuf
+    - protobuf =3
     - libprotobuf
     - setuptools
     - zeromq
@@ -44,7 +44,7 @@ requirements:
   run:
     - astropy
     - numpy
-    - protobuf
+    - protobuf =3
     - python
     - zeromq
     - zlib
