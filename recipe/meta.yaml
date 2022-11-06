@@ -12,7 +12,7 @@ source:
     - 0001-Add-support-for-CMAKE_ARGS-in-setup.py-to-enable-con.patch
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [win]
   skip: true  # [py<36]
