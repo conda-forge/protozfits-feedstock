@@ -28,7 +28,7 @@ requirements:
     # for enabling m1 cross compilation
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - protobuf                               # [build_platform != target_platform]
+    - protobuf =3                            # [build_platform != target_platform]
     - libprotobuf                            # [build_platform != target_platform]
     - setuptools                             # [build_platform != target_platform]
     - zeromq                                 # [build_platform != target_platform]
@@ -36,7 +36,7 @@ requirements:
   host:
     - pip
     - python
-    - protobuf
+    - protobuf =3
     - libprotobuf
     - setuptools
     - zeromq
@@ -44,7 +44,7 @@ requirements:
   run:
     - astropy
     - numpy
-    - protobuf
+    - protobuf =3
     - python
     - zeromq
     - zlib
