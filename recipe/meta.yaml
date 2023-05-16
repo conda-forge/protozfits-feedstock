@@ -1,5 +1,5 @@
 {% set name = "protozfits" %}
-{% set version = "2.1.0" %}
+{% set version = "2.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 54193fd380132fc06b356d011dc169a84840a00c348602f228849e24d916c239
+  sha256: 640d8405fdfdcfb225577548df504eba042a21fc062c1d85908aca48f8aec225
   patches:
     - 0001-Add-support-for-CMAKE_ARGS-in-setup.py-to-enable-con.patch
 
 build:
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [win]
   skip: true  # [py<36]
