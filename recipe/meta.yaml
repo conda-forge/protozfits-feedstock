@@ -52,7 +52,7 @@ requirements:
 test:
   imports:
     - protozfits
-    - protozfits.rawzfitsreader
+    - protozfits.rawzfits
   commands:
     - pip check
   requires:
