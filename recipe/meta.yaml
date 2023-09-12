@@ -10,9 +10,10 @@ source:
   sha256: 640d8405fdfdcfb225577548df504eba042a21fc062c1d85908aca48f8aec225
   patches:
     - 0001-Add-support-for-CMAKE_ARGS-in-setup.py-to-enable-con.patch
+    - 0002-fix-duplicate-json-name.patch
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [win]
   skip: true  # [py<36]
@@ -28,23 +29,24 @@ requirements:
     # for enabling m1 cross compilation
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - protobuf =3.20                         # [build_platform != target_platform]
-    - libprotobuf =3.20                      # [build_platform != target_platform]
+    - protobuf                               # [build_platform != target_platform]
+    - libprotobuf                            # [build_platform != target_platform]
     - setuptools                             # [build_platform != target_platform]
     - zeromq                                 # [build_platform != target_platform]
     - zlib                                   # [build_platform != target_platform]
   host:
     - pip
     - python
-    - protobuf =3.20
-    - libprotobuf =3.20
+    - protobuf
+    - libprotobuf
     - setuptools
     - zeromq
     - zlib
   run:
     - astropy
     - numpy
-    - protobuf =3.20
+    - protobuf
+    - libprotobuf
     - python
     - zeromq
     - zlib

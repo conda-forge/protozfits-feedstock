@@ -1,0 +1,26 @@
+diff --git a/data_model/raw/L0.proto b/data_model/raw/L0.proto
+index 08231c1..803d6ae 100644
+--- a/data_model/raw/L0.proto
++++ b/data_model/raw/L0.proto
+@@ -403,7 +403,7 @@ message CameraEvent
+ 	optional AnyArray pixels_flags           = 32;	// one byte of flags per pixel
+ 	//Field below actually never used AFAIK
+ 	optional AnyArray trigger_map            = 33;	// DEPRECATED: use trigger_output_patch7 or trigger_output_patch19 instead
+-	optional fixed32  event_type             = 34;
++	optional fixed32  event_type             = 34 [json_name="event_type"];
+ 	optional AnyArray trigger_input_traces   = 35;
+ 	optional AnyArray trigger_output_patch7  = 36;  // TRG0 ALG
+ 	optional AnyArray trigger_output_patch19 = 37;  // TRG1 ALG
+diff --git a/setup.py b/setup.py
+index 9f00aa6..4dc7849 100644
+--- a/setup.py
++++ b/setup.py
+@@ -138,7 +138,7 @@ setup(
+     author_email="etienne.lyard@unige.ch",
+     license="bsd",
+     version=version,
+-    install_requires=['numpy', 'protobuf~=3.20', 'astropy'],
++    install_requires=['numpy', 'protobuf', 'astropy'],
+     extras_require=extras_require,
+     ext_modules=[
+         CMakeExtension('protozfits.rawzfits', target='pyrawzfits'),
