@@ -1,0 +1,36 @@
+diff --git a/commandline_input/Config.cpp b/commandline_input/Config.cpp
+index c7d0f43..c7ea6e0 100644
+--- a/commandline_input/Config.cpp
++++ b/commandline_input/Config.cpp
+@@ -1,4 +1,5 @@
+ #include "Config.h" 
++#include <cctype>
+ #include <stdexcept>
+ #include <fstream>
+ #include <algorithm>
+@@ -190,19 +191,22 @@ std::string Config::trimKey(const std::string &entry)const
+ 
+   return result;
+ }
++
++bool is_nonspace(char c) {
++    return !std::isspace(c);
++}
++
+ /*---------------------------------------------------------------------------*/
+ // trim from start
+ std::string &Config::ltrim(std::string &s)const {
+-        s.erase(s.begin(), std::find_if(s.begin(), s.end()
+-        ,std::not1(std::ptr_fun<int, int>(std::isspace))));
++        s.erase(s.begin(), std::find_if(s.begin(), s.end(), is_nonspace));
+         return s;
+ }
+ 
+ /*---------------------------------------------------------------------------*/
+ // trim from end
+ std::string &Config::rtrim(std::string &s) const{
+-        s.erase(std::find_if(s.rbegin(), s.rend()
+-        ,std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
++        s.erase(std::find_if(s.rbegin(), s.rend(), is_nonspace).base(), s.end());
+         return s;
+ }

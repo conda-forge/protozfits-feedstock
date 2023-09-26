@@ -11,6 +11,7 @@ source:
   patches:
     - 0001-Add-support-for-CMAKE_ARGS-in-setup.py-to-enable-con.patch
     - 0002-fix-duplicate-json-name.patch
+    - 0003-cpp17-compat.patch
 
 build:
   number: 1
