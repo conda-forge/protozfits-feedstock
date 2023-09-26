@@ -1,5 +1,38 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index bfce9db..4f839de 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -29,7 +29,18 @@ include(ADHAddLibrary)
+ # find dependencies
+ find_package(Threads REQUIRED)
+ find_package(ZEROMQ REQUIRED) # uses cmake/FindZEROMQ.cmake
+-find_package(Protobuf REQUIRED) # use cmake default FindProtobuf.cmake
++
++# try modern version of finding protobuf first
++# this is needed to get the protobuf_generate_cpp command
++set(protobuf_MODULE_COMPATIBLE ON)
++# prefer finding Protobuf via cmake config, the modern approach
++find_package(Protobuf CONFIG)
++if(Protobuf_FOUND)
++    message(STATUS "Found protobuf via cmake config")
++else()
++    message(WARNING "Falling back to cmake FindProtobuf as Protobuf was not found via CONFIG")
++    find_package(Protobuf REQUIRED)
++endif()
+ 
+ # Locate source protobuf files
+ set(PROTOBUF_PATTERN "${CMAKE_CURRENT_LIST_DIR}/data_model/raw/*.proto")
+@@ -64,7 +75,7 @@ adh_add_library(
+         ${ProtoHeaders}
+     LINK_LIBRARIES
+     #link core library against protocol buffers, zeroMQ and the configuration service
+-    ${ZEROMQ_LIBRARIES} Threads::Threads ${Protobuf_LIBRARIES}
++    ${ZEROMQ_LIBRARIES} Threads::Threads ${Protobuf_LIBRARIES} protobuf::libprotobuf
+ )
+ target_include_directories(ADHCore PUBLIC commandline_input)
+ target_include_directories(ADHCore PUBLIC zmq_streamer)
 diff --git a/commandline_input/Config.cpp b/commandline_input/Config.cpp
-index c7d0f43..c7ea6e0 100644
+index c7d0f43..4c0558f 100644
 --- a/commandline_input/Config.cpp
 +++ b/commandline_input/Config.cpp
 @@ -1,4 +1,5 @@
@@ -8,12 +41,14 @@ index c7d0f43..c7ea6e0 100644
  #include <stdexcept>
  #include <fstream>
  #include <algorithm>
-@@ -190,19 +191,22 @@ std::string Config::trimKey(const std::string &entry)const
+@@ -190,19 +191,24 @@ std::string Config::trimKey(const std::string &entry)const
  
    return result;
  }
 +
-+bool is_nonspace(char c) {
++// this function needs to take an unsigned char, see
++// https://en.cppreference.com/w/cpp/string/byte/isspace#Notes
++bool is_nonspace(unsigned char c) {
 +    return !std::isspace(c);
 +}
 +
@@ -34,3 +69,4 @@ index c7d0f43..c7ea6e0 100644
 +        s.erase(std::find_if(s.rbegin(), s.rend(), is_nonspace).base(), s.end());
          return s;
  }
+ 
