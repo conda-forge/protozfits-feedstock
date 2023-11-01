@@ -1,7 +1,7 @@
 From 810f86500c6ba96f164fcc3866c118ce01ffb292 Mon Sep 17 00:00:00 2001
 From: Maximilian Linhoff <maximilian.linhoff@tu-dortmund.de>
 Date: Sun, 8 Oct 2023 15:59:09 +0100
-Subject: [PATCH 2/2] compatibility with C++17
+Subject: [PATCH 2/4] compatibility with C++17
 
 ---
  CMakeLists.txt               | 15 +++++++++++++--

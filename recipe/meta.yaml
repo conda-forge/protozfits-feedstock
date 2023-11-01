@@ -10,6 +10,8 @@ source:
   patches:
     - patches/0001-Add-support-for-CMAKE_ARGS-in-setup.py-to-enable-con.patch
     - patches/0002-compatibility-with-C-17.patch
+    - patches/0003-do-not-enforce-old-protobuf-version-in-installation-.patch
+    - patches/0004-ensure-DProtobuf_PROTOC_EXECUTABLE-.-is-respected.patch
 
 build:
   number: 2

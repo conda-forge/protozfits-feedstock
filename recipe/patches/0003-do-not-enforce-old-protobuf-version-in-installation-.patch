@@ -1,0 +1,23 @@
+From 4600accff300564e1b687973b3515fae63e5fb99 Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Wed, 1 Nov 2023 21:37:06 +1100
+Subject: [PATCH 3/4] do not enforce old protobuf-version in installation
+ metadata
+
+---
+ setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index 6f06411..287d50f 100644
+--- a/setup.py
++++ b/setup.py
+@@ -141,7 +141,7 @@ setup(
+     author_email="etienne.lyard@unige.ch",
+     license="bsd",
+     version=version,
+-    install_requires=['numpy', 'protobuf~=3.20', 'astropy'],
++    install_requires=['numpy', 'protobuf', 'astropy'],
+     extras_require=extras_require,
+     ext_modules=[
+         CMakeExtension('protozfits.rawzfits', target='pyrawzfits'),

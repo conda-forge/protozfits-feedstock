@@ -1,7 +1,7 @@
 From a50800150eae41bd08869540252ca1a139259037 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Maximilian=20N=C3=B6the?= <maximilian.noethe@tu-dortmund.de>
 Date: Sat, 15 Jan 2022 12:39:17 +0100
-Subject: [PATCH 1/2] Add support for CMAKE_ARGS in setup.py to enable conda
+Subject: [PATCH 1/4] Add support for CMAKE_ARGS in setup.py to enable conda
  forge macos arm64 build
 
 ---
