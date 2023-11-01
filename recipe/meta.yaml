@@ -38,6 +38,7 @@ requirements:
     - pip
     - python
     - protobuf
+    - libabseil
     - libprotobuf
     - setuptools
     - zeromq
