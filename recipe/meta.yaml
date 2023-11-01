@@ -8,8 +8,8 @@ source:
   url: https://pypi.io/packages/source/p/protozfits/protozfits-{{ version }}.tar.gz
   sha256: 9803d604f60f2d996cedecc056505f4b72d9d23c056ef335e57b714bf37368c8
   patches:
-    - 0001-Add-support-for-CMAKE_ARGS-in-setup.py-to-enable-con.patch
-    - 0002-cpp17-compat.patch
+    - patches/0001-Add-support-for-CMAKE_ARGS-in-setup.py-to-enable-con.patch
+    - patches/0002-compatibility-with-C-17.patch
 
 build:
   number: 2

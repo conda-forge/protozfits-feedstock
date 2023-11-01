@@ -1,0 +1,82 @@
+From 810f86500c6ba96f164fcc3866c118ce01ffb292 Mon Sep 17 00:00:00 2001
+From: Maximilian Linhoff <maximilian.linhoff@tu-dortmund.de>
+Date: Sun, 8 Oct 2023 15:59:09 +0100
+Subject: [PATCH 2/2] compatibility with C++17
+
+---
+ CMakeLists.txt               | 15 +++++++++++++--
+ commandline_input/Config.cpp | 14 ++++++++++----
+ 2 files changed, 23 insertions(+), 6 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index bfce9db..4f839de 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -29,7 +29,18 @@ include(ADHAddLibrary)
+ # find dependencies
+ find_package(Threads REQUIRED)
+ find_package(ZEROMQ REQUIRED) # uses cmake/FindZEROMQ.cmake
+-find_package(Protobuf REQUIRED) # use cmake default FindProtobuf.cmake
++
++# try modern version of finding protobuf first
++# this is needed to get the protobuf_generate_cpp command
++set(protobuf_MODULE_COMPATIBLE ON)
++# prefer finding Protobuf via cmake config, the modern approach
++find_package(Protobuf CONFIG)
++if(Protobuf_FOUND)
++    message(STATUS "Found protobuf via cmake config")
++else()
++    message(WARNING "Falling back to cmake FindProtobuf as Protobuf was not found via CONFIG")
++    find_package(Protobuf REQUIRED)
++endif()
+ 
+ # Locate source protobuf files
+ set(PROTOBUF_PATTERN "${CMAKE_CURRENT_LIST_DIR}/data_model/raw/*.proto")
+@@ -64,7 +75,7 @@ adh_add_library(
+         ${ProtoHeaders}
+     LINK_LIBRARIES
+     #link core library against protocol buffers, zeroMQ and the configuration service
+-    ${ZEROMQ_LIBRARIES} Threads::Threads ${Protobuf_LIBRARIES}
++    ${ZEROMQ_LIBRARIES} Threads::Threads ${Protobuf_LIBRARIES} protobuf::libprotobuf
+ )
+ target_include_directories(ADHCore PUBLIC commandline_input)
+ target_include_directories(ADHCore PUBLIC zmq_streamer)
+diff --git a/commandline_input/Config.cpp b/commandline_input/Config.cpp
+index c7d0f43..4c0558f 100644
+--- a/commandline_input/Config.cpp
++++ b/commandline_input/Config.cpp
+@@ -1,4 +1,5 @@
+ #include "Config.h" 
++#include <cctype>
+ #include <stdexcept>
+ #include <fstream>
+ #include <algorithm>
+@@ -190,19 +191,24 @@ std::string Config::trimKey(const std::string &entry)const
+ 
+   return result;
+ }
++
++// this function needs to take an unsigned char, see
++// https://en.cppreference.com/w/cpp/string/byte/isspace#Notes
++bool is_nonspace(unsigned char c) {
++    return !std::isspace(c);
++}
++
+ /*---------------------------------------------------------------------------*/
+ // trim from start
+ std::string &Config::ltrim(std::string &s)const {
+-        s.erase(s.begin(), std::find_if(s.begin(), s.end()
+-        ,std::not1(std::ptr_fun<int, int>(std::isspace))));
++        s.erase(s.begin(), std::find_if(s.begin(), s.end(), is_nonspace));
+         return s;
+ }
+ 
+ /*---------------------------------------------------------------------------*/
+ // trim from end
+ std::string &Config::rtrim(std::string &s) const{
+-        s.erase(std::find_if(s.rbegin(), s.rend()
+-        ,std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
++        s.erase(std::find_if(s.rbegin(), s.rend(), is_nonspace).base(), s.end());
+         return s;
+ }
+ 
