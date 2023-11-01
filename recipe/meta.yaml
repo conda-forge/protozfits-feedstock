@@ -13,7 +13,9 @@ source:
 
 build:
   number: 2
-  script: {{ PYTHON }} -m pip install . -vv
+  script:
+    - export CMAKE_ARGS="${CMAKE_ARGS} -DProtobuf_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc"  # [build_platform != target_platform]
+    - {{ PYTHON }} -m pip install . -vv
   skip: true  # [win]
   skip: true  # [python_impl == 'pypy']
 
