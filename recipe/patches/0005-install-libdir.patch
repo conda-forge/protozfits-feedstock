@@ -1,0 +1,32 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 46b103b..eb6351a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -9,12 +9,15 @@ else()
+     set(CMAKE_INSTALL_RPATH "$ORIGIN")
+ endif()
+ 
++set(PYBIND11_NEWPYTHON ON)
+ find_package(pybind11 CONFIG REQUIRED)
+ 
+ # while the bindings are still part of adh-apis, we need to switch those of, since
+ # we only want to build our local version, also turn swat off
+ set(PYTHON OFF)
+ set(SWAT OFF)
++# force libraries into expected location (next to python extension)
++set(CMAKE_INSTALL_LIBDIR ".")
+ add_subdirectory(adh-apis)
+ 
+ # generate the python protobuf bindings
+diff --git a/pyproject.toml b/pyproject.toml
+index 125af43..5a56b27 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -47,7 +47,6 @@ wheel.install-dir = "protozfits"
+ install.components = ["Python", "Runtime"]
+ cmake.targets = ["pyrawzfits"]
+ cmake.args = [
+-    "-DCMAKE_INSTALL_LIBDIR=.",
+     "-DCMAKE_BUILD_WITH_INSTALL_RPATH:BOOL=ON",
+     "-DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON",
+ ]

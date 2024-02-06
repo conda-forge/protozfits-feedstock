@@ -10,6 +10,7 @@ source:
   patches:
     - patches/0003-do-not-enforce-old-protobuf-version-in-installation-.patch
     - patches/0004-ensure-DProtobuf_PROTOC_EXECUTABLE-.-is-respected.patch
+    - patches/0005-install-libdir.patch
 
 build:
   number: 0
