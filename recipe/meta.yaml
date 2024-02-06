@@ -8,8 +8,6 @@ source:
   url: https://pypi.io/packages/source/p/protozfits/protozfits-{{ version }}.tar.gz
   sha256: 242e782d1eb7983d7180eb6eeb6d001eac09a02b45f8af169c9647adc639b963
   patches:
-    - patches/0001-Add-support-for-CMAKE_ARGS-in-setup.py-to-enable-con.patch
-    - patches/0002-compatibility-with-C-17.patch
     - patches/0003-do-not-enforce-old-protobuf-version-in-installation-.patch
     - patches/0004-ensure-DProtobuf_PROTOC_EXECUTABLE-.-is-respected.patch
 
