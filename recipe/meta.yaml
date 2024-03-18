@@ -52,6 +52,7 @@ requirements:
     - python
     - zeromq
     - zlib
+    - tqdm
 
 test:
   imports:
