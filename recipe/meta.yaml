@@ -22,6 +22,7 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - cmake
     - make
     # for enabling m1 cross compilation
