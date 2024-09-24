@@ -1,4 +1,4 @@
-{% set version = "2.5.1" %}
+{% set version = "2.6.0" %}
 
 package:
   name: protozfits
@@ -6,13 +6,13 @@ package:
 
 source:
   url: https://pypi.io/packages/source/p/protozfits/protozfits-{{ version }}.tar.gz
-  sha256: 0d02e392f7a0893bbe4b46dae33e1c88ae8fd97d96b991c4a45d4a092e3d614b
+  sha256: 1b83a62449781a83bf6d75c67add49ddc6078032f2b3782de6a2e294cf55db12
   patches:
     - patches/0004-ensure-DProtobuf_PROTOC_EXECUTABLE-.-is-respected.patch
     - patches/0005-relative-import-fix.patch
 
 build:
-  number: 2
+  number: 0
   script:
     - export CMAKE_ARGS="${CMAKE_ARGS} -DProtobuf_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc"  # [build_platform != target_platform]
     - {{ PYTHON }} -m pip install . -vv --no-build-isolation --no-deps
