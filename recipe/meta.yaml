@@ -9,7 +9,6 @@ source:
   sha256: 1b83a62449781a83bf6d75c67add49ddc6078032f2b3782de6a2e294cf55db12
   patches:
     - patches/0004-ensure-DProtobuf_PROTOC_EXECUTABLE-.-is-respected.patch
-    - patches/0005-relative-import-fix.patch
 
 build:
   number: 0
