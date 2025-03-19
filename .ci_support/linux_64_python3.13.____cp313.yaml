@@ -41,3 +41,5 @@ zip_keys:
   - python_impl
 zlib:
 - '1'
+zstd:
+- '1.5'
