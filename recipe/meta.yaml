@@ -1,4 +1,4 @@
-{% set version = "2.7.0" %}
+{% set version = "2.7.1" %}
 
 package:
   name: protozfits
@@ -6,12 +6,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/p/protozfits/protozfits-{{ version }}.tar.gz
-  sha256: ae20d3463b6d7efdfeb8d3652b630a590abd7dce817eb7537a389ff5a9a124d1
+  sha256: c69e349ff574836940be4bd53945c078970e48929aa700eca3a33bf948f991ce
   patches:
     - patches/0004-ensure-DProtobuf_PROTOC_EXECUTABLE-.-is-respected.patch
 
 build:
-  number: 1
+  number: 0
   script:
     - export CMAKE_ARGS="${CMAKE_ARGS} -DProtobuf_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc"  # [build_platform != target_platform]
     - {{ PYTHON }} -m pip install . -vv --no-build-isolation --no-deps
@@ -36,6 +36,7 @@ requirements:
     - setuptools_scm                         # [build_platform != target_platform]
     - zeromq                                 # [build_platform != target_platform]
     - zlib                                   # [build_platform != target_platform]
+    - zstd                                   # [build_platform != target_platform]
   host:
     - pip
     - python
@@ -47,6 +48,7 @@ requirements:
     - setuptools_scm
     - zeromq
     - zlib
+    - zstd
   run:
     - astropy-base
     - numpy
@@ -55,6 +57,7 @@ requirements:
     - zeromq
     - zlib
     - tqdm
+    - zstd
 
 test:
   imports:
