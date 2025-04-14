@@ -15,7 +15,7 @@ build:
   script:
     - export CMAKE_ARGS="${CMAKE_ARGS} -DProtobuf_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc"  # [build_platform != target_platform]
     - {{ PYTHON }} -m pip install . -vv --no-build-isolation --no-deps
-  skip: true  # [win or python_impl == 'pypy' or py<310]
+  skip: true  # [win or python_impl == 'pypy' or py<39]
 
 requirements:
   build:
