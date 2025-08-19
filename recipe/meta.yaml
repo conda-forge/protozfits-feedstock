@@ -7,8 +7,6 @@ package:
 source:
   url: https://pypi.org/packages/source/p/protozfits/protozfits-{{ version }}.tar.gz
   sha256: 187dadf2af59e4b471cd802139e41fa8cc9162bd9943aa3fd90028ed88a860f1
-  patches:
-    - patches/0004-ensure-DProtobuf_PROTOC_EXECUTABLE-.-is-respected.patch
 
 build:
   number: 0
