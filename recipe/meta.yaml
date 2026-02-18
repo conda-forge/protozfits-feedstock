@@ -1,4 +1,4 @@
-{% set version = "2.9.0" %}
+{% set version = "2.9.1" %}
 
 package:
   name: protozfits
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/p/protozfits/protozfits-{{ version }}.tar.gz
-  sha256: d4136c192f2bb83d376156b33536d550d0c4097b8386b87d0f2fa69f4415d5cc
+  sha256: baa44fdfcd48ebd2e0a3f8cf34f26c1712ffb2ca7f5cc6bcdad72e2d16621206
   patches:
     - patches/0004-ensure-DProtobuf_PROTOC_EXECUTABLE-.-is-respected.patch
 
