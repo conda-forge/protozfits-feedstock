@@ -3,13 +3,13 @@ About protozfits-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/protozfits-feedstock/blob/main/LICENSE.txt)
 
-Home: https://gitlab.cta-observatory.org/cta-computing/common/acada-array-elements/adh-apis
+Home: https://gitlab.cta-observatory.org/cta-computing/common/protozfits-python
 
 Package license: BSD-3-Clause
 
 Summary: Python bindings the CTA zfits reader
 
-Development: https://gitlab.cta-observatory.org/cta-computing/common/acada-array-elements/adh-apis
+Development: https://gitlab.cta-observatory.org/cta-computing/common/protozfits-python
 
 protozfits are the python bindings for reading the protozfits raw data format,
 which is a prototype raw data format build in FITS and Protocol Buffers for
