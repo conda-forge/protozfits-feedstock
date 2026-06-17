@@ -1,4 +1,4 @@
-{% set version = "2.11.0" %}
+{% set version = "2.12.0" %}
 
 package:
   name: protozfits
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/p/protozfits/protozfits-{{ version }}.tar.gz
-  sha256: d48817c55c43034b9f830bbdb793d2d9449866ddae84663bd5d93729abf2c384
+  sha256: 211e421f96ed2538d43604fa34f8ae6256919166375d2836a24614ec86674836
   patches:
     - patches/0004-ensure-DProtobuf_PROTOC_EXECUTABLE-.-is-respected.patch
 
@@ -61,6 +61,7 @@ test:
   imports:
     - protozfits
     - protozfits.rawzfits
+    - protozfits.DL0v1_Telescope_pb2
   commands:
     - pip check
   requires:
