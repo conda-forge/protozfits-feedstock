@@ -5,13 +5,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/p/protozfits/protozfits-{{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/p/protozfits/protozfits-{{ version }}.tar.gz
   sha256: 6be133da2d60dcd840cc86818eccd56be40f6a584d5aa0a548a617e0586f9fa1
   patches:
     - patches/0004-ensure-DProtobuf_PROTOC_EXECUTABLE-.-is-respected.patch
 
 build:
-  number: 0
+  number: 1
   script:
     - export CMAKE_ARGS="${CMAKE_ARGS} -DProtobuf_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc"  # [build_platform != target_platform]
     - {{ PYTHON }} -m pip install . -vv --no-build-isolation --no-deps
