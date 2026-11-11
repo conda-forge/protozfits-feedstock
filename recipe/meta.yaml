@@ -1,4 +1,4 @@
-{% set version = "2.13.1" %}
+{% set version = "2.13.2" %}
 
 package:
   name: protozfits
@@ -6,12 +6,12 @@ package:
 
 source:
   url: https://files.pythonhosted.org/packages/source/p/protozfits/protozfits-{{ version }}.tar.gz
-  sha256: 6be133da2d60dcd840cc86818eccd56be40f6a584d5aa0a548a617e0586f9fa1
+  sha256: 13b15a61c77e39070254cc2ec47ea77d55e90f808b95914da078ead82d01b109
   patches:
     - patches/0004-ensure-DProtobuf_PROTOC_EXECUTABLE-.-is-respected.patch
 
 build:
-  number: 2
+  number: 0
   script:
     - export CMAKE_ARGS="${CMAKE_ARGS} -DProtobuf_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc"  # [build_platform != target_platform]
     - {{ PYTHON }} -m pip install . -vv --no-build-isolation --no-deps
@@ -32,7 +32,6 @@ requirements:
     - pybind11                               # [build_platform != target_platform]
     - scikit-build-core                      # [build_platform != target_platform]
     - setuptools_scm                         # [build_platform != target_platform]
-    - zeromq                                 # [build_platform != target_platform]
     - zlib                                   # [build_platform != target_platform]
     - zstd                                   # [build_platform != target_platform]
   host:
@@ -44,7 +43,6 @@ requirements:
     - pybind11
     - scikit-build-core
     - setuptools_scm
-    - zeromq
     - zlib
     - zstd
   run:
@@ -52,7 +50,6 @@ requirements:
     - numpy
     - protobuf
     - python
-    - zeromq
     - zlib
     - tqdm
     - zstd
